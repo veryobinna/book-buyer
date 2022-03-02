@@ -6,20 +6,24 @@ import { getBookTitles } from './goodReads';
 import { buyBook } from './amazon';
 
 const scrapper = async () => {
-  const bookTitles = await getBookTitles();
+  try {
+    const bookTitles = await getBookTitles();
 
-  const [page, browser] = await initialize(AMAZON_URL, { headless: false });
+    const [page, browser] = await initialize(AMAZON_URL, { headless: false });
 
-  await buyBook(page, bookTitles);
+    await buyBook(page, bookTitles);
 
-  const response = await prompt({
-    type: 'confirm',
-    name: 'quit',
-    message: 'Task completed... Do you want to quit the program?',
-    default: false,
-  });
-  if (response['quit']) {
-    await browser.close();
+    const response = await prompt({
+      type: 'confirm',
+      name: 'quit',
+      message: 'Task completed... Do you want to quit the program?',
+      default: false,
+    });
+    if (response['quit']) {
+      await browser.close();
+    }
+  } catch (error) {
+      console.error(error)
   }
 };
 

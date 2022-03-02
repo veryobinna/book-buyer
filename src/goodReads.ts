@@ -13,14 +13,10 @@ export const getBookTitles = async () => {
   await Promise.all([button.click(), page.waitForNavigation()]);
 
   const titles = await page.$$eval('.resultShown img', (images) => {
-    return (
-      images
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        .map((image) => image.alt)
+    return images
+      .map((image) => (<HTMLImageElement>image).alt)
 
-        .filter((title) => title !== 'saving…')
-    );
+      .filter((title) => title !== 'saving…');
   });
 
   await browser.close();
@@ -33,13 +29,14 @@ const getGenre = async (page: Page) => {
     return genres.map((item) => item.textContent?.trim());
   });
 
-  const response = await prompt({
-    // @ts-ignore
-    type: 'list',
-    name: 'genre',
-    message: 'What is your preferred genre?',
-    choices: genres,
-  });
+  const response = await prompt([
+    {
+      type: 'list',
+      name: 'genre',
+      message: 'What is your preferred genre?',
+      choices: genres,
+    },
+  ]);
 
   return response['genre'];
 };
