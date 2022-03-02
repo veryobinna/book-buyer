@@ -23,7 +23,7 @@
     "prettier": "prettier --write .",
     "build": "yarn tsc && yarn chmod",
     "chmod": "chmod u+x ./bin/index.js",
-    "build:watch":"tsc -w -p"
+    "build:watch":"tsc -w"
   },
   "bin": {
     "book-buyer": "./bin/index.js"
