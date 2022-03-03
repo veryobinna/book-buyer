@@ -21,17 +21,17 @@ const addToCart = async (
   try {
     await Promise.all([
       page.waitForNavigation(waitOptions),
-      await page.click('#add-to-cart-button'),
+      page.click('#add-to-cart-button'),
     ]);
 
     await Promise.all([
       page.waitForNavigation(waitOptions),
-      await page.click('#nav-cart'),
+      page.click('#nav-cart'),
     ]);
 
     await Promise.all([
       page.waitForNavigation(waitOptions),
-      await page.click("input[name='proceedToRetailCheckout']"),
+      page.click("input[name='proceedToRetailCheckout']"),
     ]);
 
     return 'success';

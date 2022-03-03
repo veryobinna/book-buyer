@@ -23,7 +23,7 @@ const scrapper = async () => {
       await browser.close();
     }
   } catch (error) {
-      console.error(error)
+    console.error(error);
   }
 };
 
